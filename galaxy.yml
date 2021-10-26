@@ -1,0 +1,17 @@
+---
+namespace: community
+name: webapp-role
+version: 1.0.0
+readme: README.md
+authors:
+  - Youness TABIB
+description: Install webapp
+license_file: COPYING
+tags:
+  - v1
+repository: https://github.com/YounessT28/webapp_role.git
+documentation: https://github.com/YounessT28/webapp_role.git
+homepage: https://github.com/YounessT28/webapp_role.git
+issues: https://github.com/YounessT28/webapp_role.git
+build_ignore:
+  - .gitignore

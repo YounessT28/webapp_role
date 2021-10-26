@@ -1,3 +1,4 @@
 ---
-author: Frazer
-my_ansible_user: admin
+webapp:
+  user: admin
+  file_name: index.html.j2
