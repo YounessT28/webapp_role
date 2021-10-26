@@ -1,6 +1,6 @@
 ---
 namespace: community
-name: webapp
+name: webapp_role
 version: 1.0.0
 readme: README.md
 authors:

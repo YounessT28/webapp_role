@@ -1,7 +1,0 @@
----
-- hosts: client
-  become: true
-  vars_files:
-    - files/secrets/credentials.yml
-  roles:
-    - webapp
