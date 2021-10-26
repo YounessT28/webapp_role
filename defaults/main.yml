@@ -2,3 +2,8 @@
 webapp:
   user: admin
   file_name: index.html.j2
+  project_name: webapp
+  docker_image_name: webapp
+  html_title: my_website
+  name: INTEGRAL
+  port: 80
