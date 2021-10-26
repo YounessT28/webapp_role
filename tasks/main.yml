@@ -18,6 +18,6 @@
     name: "{{ webapp.docker_image_name }}"
     image: httpd
     ports: 
-      - "{{ instance_1.port }}:80"
+      - "{{ webapp.port }}:80"
     volumes:
       - /home/{{ webapp.user }}/{{ webapp.project_name }}/:/usr/local/apache2/htdocs/:rw
