@@ -1,43 +1,23 @@
-#Tasks of our roles
-- name: Install EPEL repo
-  package: name={{ item }} state=present
-  when: ansible_distribution == "CentOS"
-  loop:
-    - epel-release
-    - wget
-    - git
-
-- name: download pip script
-  get_url:
-    url: https://bootstrap.pypa.io/pip/2.7/get-pip.py
-    dest: /tmp/get-pip.py
-
-- name: install python-pip
-  command: python2.7 /tmp/get-pip.py
-
-- name: Install docker python
-  pip: name=docker-py
-
-- name: create websites_files
+- name: "Create directory webapp"
   file:
-    path: "/home/{{ webapp.user }}/website_files"
+    path: /home/{{ webapp.user }}/{{ webapp.project_name }}
     state: directory
+    
+- name: "Download data from git repo"
+  git:
+    repo: 'https://github.com/diranetafen/static-website-example.git'
+    dest: /home/{{ webapp.user }}/{{ webapp.project_name }}
 
-- name: copy websites_files
-  copy:
-    src: "/home/{{ webapp.user }}/ansible_training/website_files/"
-    dest: "/home/{{ webapp.user }}/website_files"
+- name: "Copy new template"
+  template: 		
+    src: index.html.j2
+    dest: /home/{{ webapp.user }}/{{ webapp.project_name }}/index.html
 
-- name: generate index.html file
-  template:
-    src: "{{ webapp.file_name }}"
-    dest: "/home/{{ webapp.user }}/website_files/index.html"
-
-- name: Create Apache container
+- name: "launch docker container"
   docker_container:
-    name: webapp
+    name: "{{ instance_1.docker_image_name }}"
     image: httpd
-    ports:
-      - "80:80"
+    ports: 
+      - "{{ instance_1.port }}:80"
     volumes:
-      - "/home/{{ webapp.user }}/website_files/:/usr/local/apache2/htdocs/:z"
+      - /home/{{ webapp.user }}/{{ webapp.project_name }}/:/usr/local/apache2/htdocs/:rw
