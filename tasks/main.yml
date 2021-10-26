@@ -15,7 +15,7 @@
 
 - name: "launch docker container"
   docker_container:
-    name: "{{ instance_1.docker_image_name }}"
+    name: "{{ webapp.docker_image_name }}"
     image: httpd
     ports: 
       - "{{ instance_1.port }}:80"
